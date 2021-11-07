@@ -10,7 +10,6 @@ import { useUserContext } from "../context/user_context";
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
-  console.log(openSidebar);
   return (
     <NavContainer>
       <div className="nav-center">
@@ -26,7 +25,7 @@ const Nav = () => {
           {links.map((link) => {
             const { text, url, id } = link;
             return (
-              <li id={id}>
+              <li key={id}>
                 <Link to={url}>{text}</Link>
               </li>
             );
