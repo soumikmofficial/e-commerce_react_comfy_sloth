@@ -29,8 +29,27 @@ const products_reducer = (state, action) => {
       };
     case GET_PRODUCTS_ERROR:
       return { ...state, products_error: true, products_loading: false };
+
+    // single product handling
+    case GET_SINGLE_PRODUCT_BEGIN:
+      return {
+        ...state,
+        single_product_loading: true,
+        single_product_error: false,
+      };
+    case GET_SINGLE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        single_product_loading: false,
+        single_product: action.payload,
+      };
+    case GET_SINGLE_PRODUCT_ERROR:
+      return {
+        ...state,
+        single_product_loading: false,
+        single_product_error: true,
+      };
   }
-  return state;
 };
 
 export default products_reducer;
