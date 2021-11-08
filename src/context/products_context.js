@@ -20,8 +20,7 @@ const initialState = {
   featured_products: [],
   products_error: false,
   single_product_loading: false,
-  single_product,
-  error: false,
+  single_product_error: false,
   single_product: {},
 };
 
