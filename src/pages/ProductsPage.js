@@ -4,7 +4,7 @@ import { Filters, ProductList, Sort, PageHero } from "../components";
 
 const ProductsPage = () => {
   return (
-    <hmain>
+    <main>
       <PageHero title="products" />
       <Wrapper className="page">
         <div className="section-center products">
@@ -15,7 +15,7 @@ const ProductsPage = () => {
           </div>
         </div>
       </Wrapper>
-    </hmain>
+    </main>
   );
 };
 

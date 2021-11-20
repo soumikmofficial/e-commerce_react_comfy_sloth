@@ -2,8 +2,15 @@ import React from "react";
 import { useFilterContext } from "../context/filter_context";
 import { BsFillGridFill, BsList } from "react-icons/bs";
 import styled from "styled-components";
+
 const Sort = () => {
-  const { filtered_products: products, grid_view } = useFilterContext();
+  const {
+    filtered_products: products,
+    grid_view,
+    setGridView,
+    setListView,
+    updateSort,
+  } = useFilterContext();
 
   return (
     <Wrapper>
@@ -11,14 +18,14 @@ const Sort = () => {
         <button
           type="button"
           className={grid_view ? "active" : null}
-          // onClick={() => dispatch({ type: SET_GRIDVIEW })}
+          onClick={setGridView}
         >
           <BsFillGridFill />
         </button>
         <button
           type="button"
           className={!grid_view ? "active" : null}
-          // onClick={() => dispatch({ type: SET_LISTVIEW })}
+          onClick={setListView}
         >
           <BsList />
         </button>
@@ -27,7 +34,12 @@ const Sort = () => {
       <hr />
       <form>
         <label htmlFor="sort">sort by</label>
-        <select name="sort" id="sort" className="sort-input">
+        <select
+          name="sort"
+          id="sort"
+          className="sort-input"
+          onClick={updateSort}
+        >
           <option value="price-lowest">price (lowest)</option>
           <option value="price-highest">price (highest)</option>
           <option value="name-a">name (a-z)</option>
