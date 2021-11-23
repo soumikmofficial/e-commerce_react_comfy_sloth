@@ -59,14 +59,37 @@ const filter_reducer = (state, action) => {
       return { ...state, filters: { ...state.filters, [name]: value } };
 
     // filter according to choice
+
     case FILTER_PRODUCTS:
       const { all_products } = state;
-      const { text, company, category, price, shipping } = state.filters;
-
+      const { text, company, category, color, price, shipping } = state.filters;
       let filtered = [...all_products];
 
+      // search
       if (text) {
         filtered = filtered.filter((product) => product.name.startsWith(text));
+      }
+      //  Category
+      if (category !== "all") {
+        filtered = filtered.filter((product) => product.category === category);
+      }
+
+      // company
+      if (company !== "all") {
+        filtered = filtered.filter((product) => product.company === company);
+      }
+
+      // color
+      if (color !== "all") {
+        filtered = filtered.filter((product) => product.colors.includes(color));
+      }
+
+      //price
+      filtered = filtered.filter((product) => product.price <= price);
+
+      // shipping
+      if (shipping) {
+        filtered = filtered.filter((product) => product.shipping === true);
       }
       return { ...state, filtered_products: filtered };
 
