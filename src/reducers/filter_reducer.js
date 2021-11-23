@@ -12,6 +12,7 @@ import {
 const filter_reducer = (state, action) => {
   const { sort, filtered_products } = state;
   switch (action.type) {
+    // load all the products
     case LOAD_PRODUCTS:
       const prices = action.payload.map((p) => p.price);
       const maxPrice = Math.max(...prices);
@@ -23,9 +24,11 @@ const filter_reducer = (state, action) => {
         filtered_products: [...action.payload],
       };
 
+    // set the grid view
     case SET_GRIDVIEW:
       return { ...state, grid_view: true };
 
+    // set the list view
     case SET_LISTVIEW:
       return { ...state, grid_view: false };
     case UPDATE_SORT:
@@ -55,8 +58,19 @@ const filter_reducer = (state, action) => {
       const { name, value } = action.payload;
       return { ...state, filters: { ...state.filters, [name]: value } };
 
+    // filter according to choice
     case FILTER_PRODUCTS:
-      return { ...state };
+      const { all_products } = state;
+      const { text, company, category, price, shipping } = state.filters;
+
+      let filtered = [...all_products];
+
+      if (text) {
+        filtered = filtered.filter((product) => product.name.startsWith(text));
+      }
+      return { ...state, filtered_products: filtered };
+
+    // clear all filters
     case CLEAR_FILTERS:
       return {
         ...state,
